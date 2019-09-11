@@ -8,7 +8,7 @@ jobs:
       - run:
           name: Running tests
           command: |
-            npm install -g apify-cli
+            npm install
             npm test    
   deploy:
     docker:
@@ -16,9 +16,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install deployment dependencies
+          name: Installing deployment dependencies
           command: |
-            npm add global apify-cli
+            npm install -g apify-cli
       - run:
           name: Deploying
           command: |
