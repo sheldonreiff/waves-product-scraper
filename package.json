@@ -1,0 +1,16 @@
+{
+	"name": "waves-product-scraper",
+	"version": "0.0.1",
+	"description": "An Apify actor that scrapes plugin and bundle details from waves.com.",
+	"dependencies": {
+		"apify": "^0.15.2"
+	},
+	"devDependencies": {
+		"jest": "^24.9.0"
+	},
+	"scripts": {
+		"start": "node main.js",
+		"test": "jest"
+	},
+	"author": "Sheldon Reiff"
+}
