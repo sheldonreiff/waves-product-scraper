@@ -71,7 +71,10 @@ const getData = async () => {
 
 const saveData = async products => {
     console.log(`Saving ${products.length} results`);
-    await Apify.pushData({ products });
+    await Apify.pushData({
+        finishedAt: new Date().toJSON(),
+        products,
+    });
     return true;
 };
 
