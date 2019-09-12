@@ -10,7 +10,7 @@
 	},
 	"scripts": {
 		"start": "node main.js",
-		"test": "jest"
+		"test": "APIFY_LOCAL_STORAGE_DIR=./apify_storage bash -c 'jest'"
 	},
 	"author": "Sheldon Reiff"
 }
