@@ -23,7 +23,7 @@ jobs:
           name: Deploying
           command: |
             apify login --token ${APIFY_TOKEN}
-            apify push  
+            apify push --build-tag ${CIRCLE_BRANCH} --version ${CIRCLE_SHA1}
 workflows:
   version: 2
   build:
