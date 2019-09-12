@@ -1,5 +1,10 @@
 const Apify = require('apify');
 
+const saveScreen = async (page, key = 'debug-screen') => {
+    const screenshotBuffer = await page.screenshot({ fullPage: true });
+    await Apify.setValue(key, screenshotBuffer, { contentType: 'image/png' });
+};
+
 const crawlPage = () => {
     const products = [];
     $('div[data-type="price-box"]').each( function() {
@@ -46,25 +51,25 @@ const getData = async () => {
     });
 
     const basePage = await browser.newPage();
-    await basePage.goto('https://www.waves.com/plugins', {
-        waitUntil:'networkidle0'
-    });
+    await basePage.goto('https://www.waves.com/plugins');
 
     console.log('Base page loaded');
+    await saveScreen(basePage, 'base-page');
 
     const dataPage = await browser.newPage();
     dataPage.on('console', (log) => console[log._type](log._text));
     await dataPage.goto(
         'https://www.waves.com/plugins#sort:path~type~order=.default-order~number~asc|views:view=grid-view|paging:currentPage=0|paging:number=all',
         {
-            waitUntil:'networkidle0',
             timeout: 60000,
         }
     );
     console.log('Data page loaded');
+    await saveScreen(dataPage, 'data-page-initial');
 
     await Apify.utils.puppeteer.injectJQuery(dataPage);
     const results = await dataPage.evaluate(crawlPage);
+    await saveScreen(dataPage, 'data-page-post-crawl');
     await browser.close();
     return results;
 }
