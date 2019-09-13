@@ -58,14 +58,9 @@ const getData = async () => {
 
     const dataPage = await browser.newPage();
     dataPage.on('console', (log) => console[log._type](log._text));
-    await dataPage.goto(
-        'https://www.waves.com/plugins#sort:path~type~order=.default-order~number~asc|views:view=grid-view|paging:currentPage=0|paging:number=all',
-        {
-            timeout: 120000,
-        }
-    );
+    await dataPage.goto('https://www.waves.com/plugins#sort:path~type~order=.default-order~number~asc|views:view=grid-view|paging:currentPage=0|paging:number=all');
     console.log('Data page loaded');
-    await saveScreen(dataPage, 'data-page-initial');
+    await saveScreen(dataPage, 'data-page');
 
     await Apify.utils.puppeteer.injectJQuery(dataPage);
     const results = await dataPage.evaluate(crawlPage);
