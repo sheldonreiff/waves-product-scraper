@@ -69,7 +69,6 @@ const getData = async () => {
 
     await Apify.utils.puppeteer.injectJQuery(dataPage);
     const results = await dataPage.evaluate(crawlPage);
-    await saveScreen(dataPage, 'data-page-post-crawl');
     await browser.close();
     return results;
 }

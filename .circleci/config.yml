@@ -9,7 +9,9 @@ jobs:
           name: Running tests
           command: |
             npm install
-            npm test    
+            npm test
+      - store_artifacts:
+          path: apify_storage
   deploy:
     docker:
       - image: node:10.16.3-buster
