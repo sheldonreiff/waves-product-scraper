@@ -61,7 +61,7 @@ const getData = async () => {
     await dataPage.goto(
         'https://www.waves.com/plugins#sort:path~type~order=.default-order~number~asc|views:view=grid-view|paging:currentPage=0|paging:number=all',
         {
-            timeout: 60000,
+            timeout: 120000,
         }
     );
     console.log('Data page loaded');
