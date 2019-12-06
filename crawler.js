@@ -29,18 +29,21 @@ const crawlPage = () => {
 
     const products = $('div[data-type="price-box"]').map( function() {
         const slug = $(this).attr('data-url');
-        return {
-            sku: $(this).attr('data-skunumber'),
-            name: $(this).attr('data-name'),
-            type: getTypeFromSlug(slug),
-            msrp: parseFloat($(this).attr('data-msrp')),
-            salePrice: parseFloat($(this).attr('data-skuprice')),
-            category: $(this).attr('data-gsf-category'),
-            note: getNote($(this)),
-            saleEnd: $(this).attr('data-saledate'),
-            badge: $(this).parent('article').attr('data-badge'),
-            thumbnailUrl: $(this).siblings('div.jplist-item-target').find('div.icon img').attr('data-original'),
-            url: `https://www.waves.com${slug}`,
+        const type = getTypeFromSlug(slug);
+        if(type){
+            return {
+                sku: $(this).attr('data-skunumber'),
+                name: $(this).attr('data-name'),
+                type,
+                msrp: parseFloat($(this).attr('data-msrp')),
+                salePrice: parseFloat($(this).attr('data-skuprice')),
+                category: $(this).attr('data-gsf-category'),
+                note: getNote($(this)),
+                saleEnd: $(this).attr('data-saledate'),
+                badge: $(this).parent('article').attr('data-badge'),
+                thumbnailUrl: $(this).siblings('div.jplist-item-target').find('div.icon img').attr('data-original'),
+                url: `https://www.waves.com${slug}`,
+            }
         }
     });
     console.log(`${products.length} products collected`);
